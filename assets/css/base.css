@@ -48,11 +48,11 @@
   0%,
   100% {
     transform: scale(1) rotate(-2deg);
-    filter: drop-shadow(0 0 2px rgba(255, 255, 150, 0.2));
+    filter: drop-shadow(0 0 2px rgba(255, 255, 176, 0.2));
   }
   50% {
     transform: scale(1.05) rotate(2deg);
-    filter: drop-shadow(0 0 12px rgba(255, 255, 150, 0.9));
+    filter: drop-shadow(0 0 12px rgba(255, 255, 193, 0.9));
   }
 }
 
@@ -76,7 +76,7 @@
   100% {
     opacity: 1;
     transform: scale(1);
-    filter: drop-shadow(0 0 2px rgba(255, 255, 150, 0.3));
+    filter: drop-shadow(0 0 2px rgba(255, 255, 169, 0.3));
   }
   50% {
     opacity: 0.8;
@@ -92,23 +92,93 @@
 @keyframes sparkle-bounce {
   0% {
     transform: translateY(0px) scale(1);
-    filter: drop-shadow(0 0 4px rgba(255, 255, 180, 0.3));
+    filter: drop-shadow(0 0 4px rgba(255, 255, 196, 0.3));
   }
   30% {
     transform: translateY(-6px) scale(1.1);
-    filter: drop-shadow(0 0 8px rgba(255, 255, 200, 0.9));
+    filter: drop-shadow(0 0 8px rgba(255, 255, 195, 0.9));
   }
   60% {
     transform: translateY(0px) scale(1.05);
-    filter: drop-shadow(0 0 6px rgba(255, 255, 160, 0.5));
+    filter: drop-shadow(0 0 6px rgba(255, 255, 185, 0.5));
   }
   100% {
     transform: translateY(0px) scale(1);
-    filter: drop-shadow(0 0 4px rgba(255, 255, 180, 0.3));
+    filter: drop-shadow(0 0 4px rgba(255, 255, 192, 0.3));
   }
 }
 
 .star-bounce-glow {
   animation: sparkle-bounce 4s ease-in-out infinite;
   transform-origin: center;
+}
+
+.decor__star {
+  position: relative;
+  z-index: 1;
+}
+
+.decor__star div {
+  position: absolute;
+  --glow-color: rgb(255, 247, 205);
+  --sparkle-size: 120%;
+  animation: twinkle 4s ease-in-out infinite;
+  animation-delay: calc(var(--i, 1) * 0.6s);
+}
+
+/* Ảnh chính: có glow đẹp */
+.decor__star div img {
+  width: 100%;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(255, 232, 181, 0.7))
+    drop-shadow(0 0 20px rgba(255, 236, 174, 0.8));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Hiệu ứng sparkle layer */
+.decor__star div::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--sparkle-size);
+  height: var(--sparkle-size);
+  transform: translate(-50%, -50%) scale(0.3);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 204, 0.8) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: sparkle 3s infinite ease-in-out;
+  pointer-events: none;
+  filter: blur(2px);
+  z-index: 1;
+}
+
+/* Twinkle effect */
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05) rotate(5deg);
+    opacity: 0.7;
+  }
+}
+
+/* Sparkle popping */
+@keyframes sparkle {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
 }
