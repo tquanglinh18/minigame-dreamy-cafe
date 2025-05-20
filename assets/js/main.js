@@ -1,7 +1,5 @@
 const gameBoard = document.querySelector(".game-board");
-const startButton = document.querySelector(".start-button"); // Thêm tham chiếu đến nút Bắt đầu
 const resetButton = document.querySelector(".reset-button");
-const modelBox = document.getElementById("model-congratulations");
 
 // Danh sách 12 giá trị ẩn cho các ô. Sử dụng true cho mèo (giờ là Jojo), false cho chúc may mắn.
 // Điều này giúp tránh người dùng đọc trực tiếp nội dung nhạy cảm qua DevTools.
@@ -43,9 +41,6 @@ function createBoard() {
   hasWon = false; // Reset trạng thái thắng
   gameStarted = false; // Đặt lại trạng thái game chưa bắt đầu
 
-  // Đảm bảo nút Bắt đầu được bật khi tạo bảng mới
-  startButton.disabled = false;
-
   // Xáo trộn các giá trị ẩn cho mặt trước của thẻ (true/false)
   const shuffledValues = shuffle(cardValues);
 
@@ -58,7 +53,7 @@ function createBoard() {
 
   shuffledValues.forEach((value, index) => {
     const card = document.createElement("div");
-    card.classList.add("card");
+    card.classList.add("card-flip");
     // Lưu giá trị ẩn (true/false) vào data attribute
     card.dataset.value = value;
     // Lưu số ngẫu nhiên vào data attribute
@@ -87,7 +82,7 @@ function createBoard() {
     const cardBack = document.createElement("div");
     cardBack.classList.add("card-face", "card-back", "initial"); // Thêm class 'initial' và hiển thị "?"
     cardBack.textContent = "?"; // Hiển thị dấu "?" ban đầu
-    cardBack.setAttribute("target-node", ".card"); // Lưu số ngẫu nhiên vào data attribute
+    cardBack.setAttribute("target-node", ".card-flip"); // Lưu số ngẫu nhiên vào data attribute
     cardBack.setAttribute("font-percents", "0.7"); // Lưu số ngẫu nhiên vào data attribute
     // Áp dụng màu nền dựa trên CHỈ SỐ (vị trí) của ô vào cardBack
     if (specialIndices.includes(index)) {
@@ -105,10 +100,8 @@ function createBoard() {
 
     gameBoard.appendChild(card);
   });
-
-  // Hiển thị nút Bắt đầu khi bảng được tạo mới
-  startButton.style.display = "block";
   getFontSizeTarget(); // Gọi hàm để thiết lập kích thước font cho các thẻ
+  startGame() 
 }
 
 // Hàm bắt đầu trò chơi (được gọi khi nhấn nút Bắt đầu)
@@ -116,10 +109,9 @@ function startGame() {
   if (gameStarted) return; // Tránh bắt đầu lại nếu game đã chạy
 
   gameStarted = true; // Đặt trạng thái game đã bắt đầu
-  startButton.disabled = true; // Vô hiệu hóa nút Bắt đầu sau khi nhấn
 
   // Lật tất cả thẻ về mặt sau hiển thị số
-  const allCards = gameBoard.querySelectorAll(".card");
+  const allCards = gameBoard.querySelectorAll(".card-flip");
   allCards.forEach((card) => {
     const cardBack = card.querySelector(".card-back");
     cardBack.textContent = card.dataset.number; // Hiển thị số ngẫu nhiên
@@ -150,7 +142,7 @@ function flipCard() {
   // Kiểm tra xem đã lật đủ 2 thẻ chưa
   if (flippedCards.length === 2) {
     lockBoard = true; // Khóa bảng để không lật thêm khi đang kiểm tra
-    setTimeout(checkMatch, 1000); // Chờ 1 giây rồi kiểm tra cặp
+    setTimeout(checkMatch, 300); // Chờ 1 giây rồi kiểm tra cặp
   }
 }
 
@@ -166,7 +158,6 @@ function checkMatch() {
     console.log("Chúc mừng! Bạn đã trúng thưởng!");
     hasWon = true; // Đặt cờ thắng
     lockBoard = true; // Khóa bảng ngay lập tức khi biết thắng
-    modelBox.showPopover();
 
     // Chờ 2 giây để người dùng nhìn thấy thông báo trúng thưởng
     setTimeout(() => {
@@ -181,7 +172,7 @@ function checkMatch() {
     setTimeout(() => {
       unflipCards(); // Úp lại tất cả thẻ đang lật (bao gồm 2 thẻ vừa click)
       lockBoard = false; // Mở khóa bảng để người chơi tiếp tục lật
-    }, 1000); // Hiển thị kết quả thua trong 1 giây
+    }, 500); // Hiển thị kết quả thua trong 1 giây
   }
 
   // Xóa danh sách các thẻ đã lật cho lượt tiếp theo
@@ -192,7 +183,7 @@ function checkMatch() {
 // Hàm úp lại TẤT CẢ các thẻ đang lật (có class 'is-flipped')
 // Sử dụng khi không trúng thưởng
 function unflipCards() {
-  const allFlipped = gameBoard.querySelectorAll(".card.is-flipped");
+  const allFlipped = gameBoard.querySelectorAll(".card-flip.is-flipped");
   allFlipped.forEach((card) => {
     card.classList.remove("is-flipped");
   });
@@ -204,7 +195,7 @@ function unflipCards() {
 
 // Hàm lật TẤT CẢ 12 thẻ lên (khi thắng)
 function revealAllCards() {
-  const allCards = gameBoard.querySelectorAll(".card");
+  const allCards = gameBoard.querySelectorAll(".card-flip");
   allCards.forEach((card) => {
     card.classList.add("is-flipped");
     // Loại bỏ listener click để không thể lật lại sau khi đã lật hết
@@ -215,9 +206,6 @@ function revealAllCards() {
 
 // Hàm thiết lập sự kiện cho các nút điều khiển
 function setupControls() {
-  // Gán sự kiện click cho nút Bắt đầu
-  startButton.removeEventListener("click", startGame); // Xóa listener cũ nếu có
-  startButton.addEventListener("click", startGame);
 
   // Gán sự kiện click cho nút Chơi lại (luôn hiển thị)
   resetButton.removeEventListener("click", createBoard); // Xóa listener cũ nếu có
