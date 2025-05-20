@@ -1,6 +1,7 @@
 const gameBoard = document.querySelector('.game-board');
 const startButton = document.querySelector('.start-button'); // Thêm tham chiếu đến nút Bắt đầu
 const resetButton = document.querySelector('.reset-button');
+const modelBox = document.getElementById('model-congratulations');
 
 // Danh sách 12 giá trị ẩn cho các ô. Sử dụng true cho mèo (giờ là Jojo), false cho chúc may mắn.
 // Điều này giúp tránh người dùng đọc trực tiếp nội dung nhạy cảm qua DevTools.
@@ -147,6 +148,7 @@ function checkMatch() {
         console.log("Chúc mừng! Bạn đã trúng thưởng!");
         hasWon = true; // Đặt cờ thắng
         lockBoard = true; // Khóa bảng ngay lập tức khi biết thắng
+        modelBox.showPopover();
 
         // Chờ 2 giây để người dùng nhìn thấy thông báo trúng thưởng
         setTimeout(() => {
