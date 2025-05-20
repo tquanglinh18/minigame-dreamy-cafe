@@ -11,19 +11,19 @@
 }
 
 @font-face {
-  font-family: "Myriad Pro";
-  src: url("../fontsMyriadPro-Regular.eot");
-  src: url("../fontsMyriadPro-Regular.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/MyriadPro-Regular.woff2") format("woff2"),
-    url("../fonts/MyriadPro-Regular.woff") format("woff"),
-    url("../fonts/MyriadPro-Regular.ttf") format("truetype");
+  font-family: "Linotte Bold";
+  src: url("../fonts/r0c0iLinotte-Bold.eot");
+  src: url("../fonts/r0c0iLinotte-Bold.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/r0c0iLinotte-Bold.woff2") format("woff2"),
+    url("../fonts/r0c0iLinotte-Bold.woff") format("woff"),
+    url("../fonts/r0c0iLinotte-Bold.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 body {
-  font-family: Myriad Pro;
+  font-family: "Linotte Bold", sans-serif;
   font-weight: normal;
   font-style: normal;
 }
