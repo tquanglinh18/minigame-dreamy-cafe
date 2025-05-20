@@ -1,0 +1,114 @@
+@keyframes float-swing {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.balloon-effect {
+  animation: float-swing 4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes float-swing-reverse {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(5px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(5px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.balloon-effect-reverse {
+  animation: float-swing-reverse 4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    transform: scale(1) rotate(-2deg);
+    filter: drop-shadow(0 0 2px rgba(255, 255, 150, 0.2));
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+    filter: drop-shadow(0 0 12px rgba(255, 255, 150, 0.9));
+  }
+}
+
+@keyframes rotate-scan {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.camera-effect {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+  position: relative;
+}
+
+/* Ngôi sao 1 - Lấp lánh */
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px rgba(255, 255, 150, 0.3));
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 200, 0.9));
+  }
+}
+
+.star-sparkle {
+  animation: sparkle 2.5s infinite ease-in-out;
+}
+
+@keyframes sparkle-bounce {
+  0% {
+    transform: translateY(0px) scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 180, 0.3));
+  }
+  30% {
+    transform: translateY(-6px) scale(1.1);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 200, 0.9));
+  }
+  60% {
+    transform: translateY(0px) scale(1.05);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 160, 0.5));
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 180, 0.3));
+  }
+}
+
+.star-bounce-glow {
+  animation: sparkle-bounce 4s ease-in-out infinite;
+  transform-origin: center;
+}

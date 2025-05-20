@@ -1,69 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minigame Dreamy Cafe</title>
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <link rel="stylesheet" href="./assets/css/styles-site.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/spine-player.css"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minigame Dreamy Cafe</title>
-  <link rel="stylesheet" href="./assets/css/main.css" />
-  <link rel="stylesheet" href="./assets/css/base.css" />
-  <link rel="stylesheet" href="./assets/css/styles-site.css" />
-</head>
-
-<body>
-  <section>
-
-    <div class="decor">
-      <div class="decor__star">
-        <img src="./assets/images/img_decor_star.png" alt="">
-      </div>
-
-      <div class="decor__light-spin">
-        <!-- <img src="./assets/images/img_decor_hightlight_spin.png" alt=""> -->
-      </div>
-    </div>
-
-    <div class="page-content">
-      <div class="game-header">
-        <div class="game-header__logo">
-          <img src="./assets/images/logo_dreamy.png" alt="">
+  <body>
+    <section>
+      <div class="decor">
+        <div class="decor__star">
+          <img src="./assets/images/img_decor_star.png" alt="" />
         </div>
-        <div class="game-header__title">
-          <img src="./assets/images/img_title.png" alt="">
+
+        <div class="decor__light-spin">
+          <!-- <img src="./assets/images/img_decor_hightlight_spin.png" alt=""> -->
         </div>
       </div>
-      <div class="game-content">
-        <div class="game-board">
+
+      <div class="page-content">
+        <div class="game-header">
+          <div class="game-header__logo">
+            <img src="./assets/images/logo_dreamy.png" alt="" />
+          </div>
+          <div class="game-header__title">
+            <img src="./assets/images/img_title.png" alt="" />
+          </div>
+        </div>
+        <div class="lst-box-wrap">
+          <div
+            class="balloon-effect"
+            style="
+              width: 17%;
+              padding-top: 17%;
+              left: -35%;
+              bottom: 5%;
+              position: absolute;
+            "
+          >
+            <!-- bong bóng -->
+            <div style="position: absolute; inset: 0">
+              <img
+                style="width: 100%; height: 100%"
+                src="./assets/images/decor_5.png"
+                alt=""
+              />
+            </div>
+            <!-- camera -->
+            <div style="width: 38%; position: absolute; top: 21%; right: 28%">
+              <img
+                class="camera-effect"
+                style="width: 100%; height: 100%"
+                src="./assets/images/decor_camera.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <!-- trái tim -->
+          <div
+            class="balloon-effect-reverse"
+            style="
+              position: absolute;
+              bottom: 0;
+              left: -20%;
+              width: 28%;
+              z-index: 20;
+            "
+          >
+            <img
+              style="width: 100%"
+              src="./assets/images/decor_heart.png"
+              alt=""
+            />
+          </div>
+            <div
+            class="balloon-effect-reverse"
+            style="      
+              position: absolute;
+              top: -15%;
+              left: -24%;
+              width: 34%;
+              z-index: 10;          
+            "
+          >
+            <img style="width: 100%" src="./assets/images/decor_3.png" alt="" />
+          </div>
+          <div
+            class="balloon-effect-reverse"
+            style="
+              position: absolute;
+              bottom: 8%;
+              left: -21%;
+              width: 55%;
+              z-index: 10;
+            "
+          >
+            <img style="width: 100%" src="./assets/images/decor_4.png" alt="" />
+          </div>
+          <div
+            class="balloon-effect-reverse"
+            style="
+               position: absolute;
+              bottom: 8%;
+              right: -21%;
+              width: 55%;
+              z-index: 10;
+            "
+          >
+            <img style="width: 100%" src="./assets/images/decor_4.png" alt="" />
+          </div>
+          <!-- ngôi sao 1 -->
+          <div
+            class="balloon-effect-reverse"
+            style="
+              position: absolute;
+              bottom: 7%;
+              left: -25%;
+              width: 30%;
+              z-index: 20;
+            "
+          >
+            <img style="width: 100%" src="./assets/images/decor_2.png" alt="" />
+          </div>
+          <!-- ngôi sao 2 -->
+          <div
+            class="balloon-effect-reverse"
+            style="
+              position: absolute;
+              bottom: 0%;
+              left: -7%;
+              width: 17%;
+              z-index: 20;
+            "
+          >
+            <img style="width: 100%" src="./assets/images/decor_1.png" alt="" />
+          </div>
+          <!-- ngôi sao 2 -->
+          <div
+            class="balloon-effect-reverse"
+            style="
+              position: absolute;
+              bottom: -2%;
+              right: -18%;
+              width: 25%;
+              z-index: 20;
+            "
+          >
+            <img class="star-bounce-glow" style="width: 100%" src="./assets/images/decor_1.png" alt="" />
+          </div>
+          <div
+            id="left-character"
+            style="
+              filter: contrast(1.25);
+              position: absolute;
+              top: -1%;
+              left: -31%;
+              width: 54%;
+              height: 100%;
+              z-index: 5;
+            "
+          ></div>
+          <div
+            id="right-character"
+            style="
+              filter: contrast(1.25);
+              position: absolute;
+              transform: scaleX(-1);
+              top: -4%;
+              right: -41%;
+              width: 78%;
+              height: 100%;
+              z-index: 5;
+            "
+          ></div>
+          <div class="game-content">
+            <div class="game-board"></div>
+          </div>
+        </div>
+        <!-- <div class="message"></div> -->
+        <div class="game-action">
+          <button class="start-button">
+            <img src="./assets/images/btn_start.png" alt="" />
+          </button>
+          <button class="reset-button">
+            <img src="./assets/images/btn_reset.png" alt="" />
+          </button>
         </div>
       </div>
-      <!-- <div class="message"></div> -->
-      <div class="game-action">
-        <button class="start-button">
-          <img src="./assets/images/btn_start.png" alt="">
-        </button>
-        <button class="reset-button">
-          <img src="./assets/images/btn_reset.png" alt="">
-        </button>
 
-      </div>
-    </div>
-
-    <div class="modal-components">
-      <button class="btn-show" popovertarget="model-congratulations"></button>
-      <div id="model-congratulations" popover>
-        <div class="model-content">
-          <h2>Xin chúc mừng</h2>
-          <p>Hoàn thành Lật Thẻ May Mắn,<br />
-            Chủ tiệm có trí nhớ thật siêu phàm! ^^</p>
-          <button class="btn-confirm" popovertarget="model-congratulations">Xác nhận</button>
+      <div style="position: fixed" class="modal-components">
+        <button class="btn-show" popovertarget="model-congratulations"></button>
+        <div id="model-congratulations" popover>
+          <div class="model-content">
+            <h2>Xin chúc mừng</h2>
+            <p>
+              Hoàn thành Lật Thẻ May Mắn,<br />
+              Chủ tiệm có trí nhớ thật siêu phàm! ^^
+            </p>
+            <button class="btn-confirm" popovertarget="model-congratulations">
+              Xác nhận
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- <script src="./assets/js/jquery-3.7.1.min.js"></script> -->
-  <script src="./assets/js/main.js"></script>
-
-</body>
-
+    </section>
+    <script src="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/iife/spine-player.js"></script>
+    <!-- <script src="./assets/js/jquery-3.7.1.min.js"></script> -->
+    <script src="./assets/js/main.js"></script>
+  </body>
 </html>
