@@ -92,6 +92,10 @@ function createBoard() {
       cardBack.classList.add("default-color"); // Sử dụng màu mặc định
     }
 
+    const allCards = gameBoard.querySelectorAll('.card-flip');
+    allCards.forEach(card => {
+      card.classList.remove('hidden-during-win-animation');
+    });
     card.appendChild(cardFront);
     card.appendChild(cardBack);
 
@@ -101,7 +105,7 @@ function createBoard() {
     gameBoard.appendChild(card);
   });
   getFontSizeTarget(); // Gọi hàm để thiết lập kích thước font cho các thẻ
-  startGame() 
+  startGame()
 }
 
 // Hàm bắt đầu trò chơi (được gọi khi nhấn nút Bắt đầu)
@@ -159,11 +163,13 @@ function checkMatch() {
     hasWon = true; // Đặt cờ thắng
     lockBoard = true; // Khóa bảng ngay lập tức khi biết thắng
 
+    setTimeout(() => {
+      animateJojoWin(card1, card2); // Gọi hàm animation
+    }, 500);
     // Chờ 2 giây để người dùng nhìn thấy thông báo trúng thưởng
     setTimeout(() => {
       revealAllCards(); // Lật TẤT CẢ các thẻ lên để xem kết quả cuối cùng
-      console.log(" Toàn bộ kết quả - Game kết thúc"); // Thêm thông báo
-    }, 2000); // Hiển thị thông báo trúng thưởng trong 2 giây
+    }, 500); // Hiển thị thông báo trúng thưởng trong 2 giây
   } else {
     // Trường hợp không trúng thưởng (không phải 2 Jojo)
     console.log("Rất tiếc, không trúng thưởng. Hãy thử lại!");
@@ -178,6 +184,102 @@ function checkMatch() {
   // Xóa danh sách các thẻ đã lật cho lượt tiếp theo
   flippedCards = [];
   // lockBoard được điều khiển trong các setTimeout và unflipCards
+}
+
+
+// *** Hàm mới: Xử lý animation khi thắng Jojo ***
+function animateJojoWin(card1, card2) {
+  // 1. Hiệu ứng sáng lên
+  card1.classList.add('lighting-up');
+  card2.classList.add('lighting-up');
+
+  // *** Ẩn các thẻ không phải Jojo khi hiệu ứng bắt đầu ***
+  const allCards = gameBoard.querySelectorAll('.card-flip');
+  allCards.forEach(card => {
+    // Kiểm tra nếu thẻ không phải là card1 hoặc card2
+    if (card !== card1 && card !== card2) {
+      card.classList.add('hidden-during-win-animation');
+    }
+  });
+
+  // Lấy vị trí hiện tại của 2 thẻ Jojo
+  const rect1 = card1.getBoundingClientRect();
+  const rect2 = card2.getBoundingClientRect();
+  const gameBoardRect = gameBoard.getBoundingClientRect();
+
+  // Tính toán vị trí trung tâm của game board
+  const centerX = gameBoardRect.width / 2 - rect1.width / 2; // Tâm ngang
+  const centerY = gameBoardRect.height / 2 - rect1.height / 2; // Tâm dọc
+
+  // Chuyển sang absolute positioning và đặt vị trí ban đầu
+  // Vị trí ban đầu cần tính toán dựa trên offset so với gameBoard
+  const initialTop1 = rect1.top - gameBoardRect.top;
+  const initialLeft1 = rect1.left - gameBoardRect.left;
+  const initialTop2 = rect2.top - gameBoardRect.top;
+  const initialLeft2 = rect2.left - gameBoardRect.left;
+
+  card1.style.position = 'absolute';
+  card1.style.top = initialTop1 + 'px';
+  card1.style.left = initialLeft1 + 'px';
+
+  card2.style.position = 'absolute';
+  card2.style.top = initialTop2 + 'px';
+  card2.style.left = initialLeft2 + 'px';
+
+
+  // 2. Di chuyển và hợp nhất (di chuyển về tâm)
+  // Sử dụng setTimeout để cho hiệu ứng sáng lên có thời gian hiển thị
+  setTimeout(() => {
+    card1.classList.remove('lighting-up');
+    card2.classList.remove('lighting-up');
+
+    card1.classList.add('moving-to-center');
+    card2.classList.add('moving-to-center');
+
+    // Đặt vị trí đích là tâm game board
+    card1.style.top = centerY + 'px';
+    card1.style.left = centerX + 'px';
+    card2.style.top = centerY + 'px';
+    card2.style.left = centerX + 'px';
+
+    // Lắng nghe sự kiện kết thúc transition của một trong hai thẻ
+    card1.addEventListener('transitionend', handleMoveEnd);
+    // Lưu trữ thẻ thứ hai để ẩn sau khi di chuyển
+    card1.dataset.secondCardId = card2.id || 'card2'; // Gán ID tạm nếu chưa có
+    card2.id = card1.dataset.secondCardId; // Đảm bảo thẻ thứ 2 có ID để tìm
+
+  }, 500); // Chờ 0.5 giây sau khi sáng lên
+
+  // Hàm xử lý sau khi di chuyển về tâm kết thúc
+  function handleMoveEnd() {
+    card1.removeEventListener('transitionend', handleMoveEnd); // Gỡ bỏ listener
+    const card2 = document.getElementById(card1.dataset.secondCardId);
+
+    // Ẩn thẻ thứ hai
+    if (card2) {
+      card2.classList.add('hidden');
+    }
+    card1.classList.add('is-flipped');
+
+    // 3. Lắc lư và phóng to trên thẻ còn lại
+    card1.classList.remove('moving-to-center');
+    card1.classList.add('win-animation');
+
+    setTimeout(() => {
+      card1.style.transform = 'rotateY(180deg)'; // Đặt lại transform để animation lắc lư hoạt động từ gốc
+      card1.classList.remove('moving-to-center'); // Loại bỏ class di chuyển
+      card1.classList.add('win-animation'); // Thêm class animation lắc lư
+      card1.addEventListener('animationend', handleWinAnimationEnd);
+    }, 100);
+
+  }
+
+  // Hàm xử lý sau khi animation lắc lư/phóng to kết thúc
+  function handleWinAnimationEnd() {
+    card1.removeEventListener('animationend', handleWinAnimationEnd); // Gỡ bỏ listener
+
+    console.log("Animation kết thúc!");
+  }
 }
 
 // Hàm úp lại TẤT CẢ các thẻ đang lật (có class 'is-flipped')

@@ -1,159 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hiệu ứng Pháo giấy</title>
+    <title>Box với Đường viền chạy đuổi nhau</title>
     <style>
         body {
-            margin: 0;
-            overflow: hidden; /* Ẩn các hạt pháo giấy khi chúng ra ngoài màn hình */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f0f0;
-            font-family: sans-serif;
+            background-color: #222;
+            margin: 0;
+            overflow: hidden; /* Đảm bảo không có thanh cuộn nếu box quá lớn */
         }
 
-        #confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Đảm bảo không cản trở tương tác người dùng */
-            overflow: hidden;
-            z-index: 9999; /* Đảm bảo pháo giấy ở trên cùng */
-        }
-
-        .confetti {
-            position: absolute;
-            width: 8px; /* Kích thước hạt pháo giấy */
-            height: 8px;
-            background-color: #f00; /* Màu mặc định, sẽ được thay đổi bằng JS */
-            opacity: 0; /* Bắt đầu với độ trong suốt bằng 0 */
-            transform-origin: center;
-            animation-timing-function: ease-out;
-        }
-
-        /* Thêm một số biến thể hình dạng cho confetti */
-        .confetti.round {
-            border-radius: 50%;
-        }
-
-        .confetti.square {
-            border-radius: 0;
-        }
-
-        .confetti.rectangle {
-            border-radius: 0;
-            width: 12px; /* Chiều rộng lớn hơn */
-            height: 6px; /* Chiều cao nhỏ hơn */
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #4CAF50;
+        .running-border-box {
+            width: 300px;
+            height: 200px;
+            padding: 20px;
+            position: relative; /* Để định vị pseudo-element */
+            background-color: #333;
             color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Quan trọng để che đi phần gradient thừa */
+            border-radius: 10px; /* Thêm bo góc cho đẹp */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Thêm bóng đổ cho đẹp */
+            text-align: center;
         }
 
-        button:hover {
-            background-color: #45a049;
+        .running-border-box::before {
+            content: '';
+            position: absolute;
+            top: -50%; /* Đẩy gradient ra ngoài để bắt đầu animation */
+            left: -50%;
+            width: 200%; /* Kích thước lớn hơn box để gradient bao phủ */
+            height: 200%;
+            /* Gradient hình nón với nhiều màu */
+            background: conic-gradient(from 0deg, #ff0000, #ff8000, #ffff00, #00ff00, #0080ff, #8000ff, #ff00ff, #ff0000);
+            animation: rotateBorder 4s linear infinite; /* Animation xoay */
+            z-index: -1; /* Đặt phía sau nội dung */
+        }
+
+        .running-border-box::after {
+            content: '';
+            position: absolute;
+            top: 5px; /* Tạo khoảng cách cho đường viền */
+            left: 5px; /* Tạo khoảng cách cho đường viền */
+            right: 5px; /* Tạo khoảng cách cho đường viền */
+            bottom: 5px; /* Tạo khoảng cách cho đường viền */
+            background-color: #333; /* Màu nền thật của box, chồng lên gradient */
+            z-index: 0; /* Đảm bảo nội dung box nằm trên lớp này */
+            border-radius: 8px; /* Nhỏ hơn box chính 1 chút để tạo khe hở viền */
+        }
+
+        .running-border-box p {
+            position: relative; /* Đảm bảo nội dung luôn hiển thị trên cùng */
+            z-index: 1;
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        @keyframes rotateBorder {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 <body>
-    <div id="confetti-container"></div>
 
-    <button onclick="startConfetti()">Bắn Pháo Giấy</button>
+    <div class="running-border-box">
+        <p>Đây là một box với đường viền chạy đuổi nhau!</p>
+    </div>
 
-    <script>
-        const confettiContainer = document.getElementById('confetti-container');
-        const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff', '#f80', '#80f', '#08f']; // Các màu của pháo giấy
-
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            confettiContainer.appendChild(confetti);
-
-            // Chọn hình dạng ngẫu nhiên
-            const shapes = ['round', 'square', 'rectangle'];
-            const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-            confetti.classList.add('confetti', randomShape);
-
-            // Kích thước ngẫu nhiên (chỉ áp dụng cho round và square)
-            if (randomShape === 'round' || randomShape === 'square') {
-                const size = Math.random() * 6 + 6; // Kích thước từ 6px đến 12px
-                confetti.style.width = `${size}px`;
-                confetti.style.height = `${size}px`;
-            }
-
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.backgroundColor = randomColor;
-
-            // Vị trí xuất phát ngẫu nhiên ở phía trên màn hình
-            const startX = Math.random() * window.innerWidth;
-            confetti.style.left = `${startX}px`;
-            confetti.style.top = '-10px'; // Bắt đầu từ phía trên
-
-            // Góc xoay ngẫu nhiên
-            const randomRotation = Math.random() * 360;
-            confetti.style.transform = `rotate(${randomRotation}deg)`;
-
-            // Khởi tạo animation
-            requestAnimationFrame(() => {
-                confetti.style.opacity = '1'; // Hiển thị hạt pháo giấy
-                animateConfetti(confetti, startX);
-            });
-        }
-
-        function animateConfetti(confetti, startX) {
-            const duration = Math.random() * 2 + 3; // Thời gian rơi ngẫu nhiên từ 3 đến 5 giây
-            const endY = window.innerHeight + 20; // Vị trí kết thúc (rơi ra khỏi màn hình)
-            const endXOffset = (Math.random() - 0.5) * 400; // Dịch chuyển ngang ngẫu nhiên (rộng hơn)
-            const endX = startX + endXOffset;
-
-            // Thêm một chút xoay và biến đổi kích thước trong quá trình rơi
-            const finalRotation = Math.random() * 1080 + 360; // Xoay nhiều vòng
-            const finalScale = 0.8 + Math.random() * 0.4; // Kích thước cuối cùng từ 0.8 đến 1.2
-
-            confetti.style.transition = `
-                top ${duration}s linear,
-                left ${duration}s ease-out,
-                transform ${duration}s linear,
-                opacity 0.5s ease-out ${duration - 0.5}s /* mờ dần ở cuối */
-            `;
-            confetti.style.top = `${endY}px`;
-            confetti.style.left = `${endX}px`;
-            confetti.style.transform = `rotate(${finalRotation}deg) scale(${finalScale})`; // Xoay và thay đổi kích thước
-            confetti.style.opacity = '0'; // Mờ dần khi rơi xuống
-
-            // Xóa hạt pháo giấy sau khi rơi xong để tránh rò rỉ bộ nhớ
-            confetti.addEventListener('transitionend', () => {
-                confetti.remove();
-            });
-        }
-
-        function startConfetti() {
-            const numConfetti = 80; // Số lượng hạt pháo giấy mỗi lần bắn (tăng lên)
-            let count = 0;
-            const interval = setInterval(() => {
-                createConfetti();
-                count++;
-                if (count >= numConfetti) {
-                    clearInterval(interval);
-                }
-            }, 30); // Tốc độ tạo hạt pháo giấy (nhanh hơn)
-        }
-
-        // Tùy chọn: Tự động bắn pháo giấy khi tải trang
-        // window.onload = startConfetti;
-    </script>
 </body>
 </html>

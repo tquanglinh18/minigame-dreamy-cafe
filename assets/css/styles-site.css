@@ -267,6 +267,7 @@ section {
   font-size: 4rem;
   font-weight: bold;
   color: #0f779a;
+  padding-top: 3rem;
 }
 
 .modal-body {
@@ -295,9 +296,70 @@ section {
   border: none;
   background-color: transparent;
 
-  transform: translateY(calc(100% - 16px));
+  transform: translateY(65%);
 }
-
 .modal-footer .btn-close-modal img {
   width: 100%;
+}
+
+.modal-dialog {
+  max-width: 45%;
+}
+
+/* Áp dụng animation di chuyển background khi thẻ Jojo được lật */
+.card-flip.is-flipped .card-front.isJojo {
+  background-position: 100% 50%; /* Đích đến của background-position */
+}
+
+/* *** CSS cho hiệu ứng thắng Jojo *** */
+
+/* Hiệu ứng sáng lên */
+.card-flip.lighting-up {
+  box-shadow: 0 0 20px 10px rgba(255, 215, 0, 0.7); /* Ánh sáng vàng */
+  z-index: 10; /* Đưa lên trên cùng */
+}
+
+/* Trạng thái khi thẻ đang di chuyển */
+.card-flip.moving-to-center {
+  position: absolute; /* Chuyển sang absolute để di chuyển tự do */
+  transition: top 1s ease-in-out, left 1s ease-in-out, transform 0.5s; /* Transition cho vị trí */
+  z-index: 20; /* Đảm bảo ở trên các thẻ khác */
+}
+.moving-to-center.card-flip {
+  max-width: 25%;
+}
+
+.win-animation.card-flip {
+  max-width: 25%;
+  scale: 2;
+}
+
+/* Hiệu ứng lắc lư và phóng to */
+.card-flip.win-animation {
+  animation: shake-and-scale 1s ease-in-out forwards; /* Tên animation, thời gian, kiểu, giữ trạng thái cuối */
+  z-index: 30; /* Đưa lên trên cùng */
+}
+
+/* Định nghĩa keyframes cho hiệu ứng lắc lư và phóng to */
+@keyframes shake-and-scale {
+  0% {
+    transform: scale(1);
+  } /* Bắt đầu */
+
+  100% {
+    transform: scale(1.5);
+  } /* Kết thúc ở giữa, phóng to tối đa */
+}
+
+/* Ẩn thẻ Jojo thứ hai sau khi hợp nhất */
+.card-flip.hidden {
+  visibility: hidden; /* Ẩn nhưng vẫn giữ không gian */
+  /* Hoặc display: none; nếu không muốn giữ không gian */
+}
+
+/* *** Class để ẩn các thẻ không phải Jojo trong animation thắng *** */
+.card-flip.hidden-during-win-animation {
+  opacity: 0; /* Làm mờ dần */
+  visibility: hidden; /* Ẩn hoàn toàn sau khi mờ */
+  pointer-events: none; /* Đảm bảo không thể click */
 }
