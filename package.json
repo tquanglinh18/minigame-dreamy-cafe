@@ -1,0 +1,14 @@
+{
+  "name": "project_bassic",
+  "version": "0.0.1",
+  "description": "Project Bassic",
+  "license": "MIT",
+  "main": "index.html",
+  "scripts": {
+    "start": "sass --watch ./assets/scss/main.scss ./assets/css/styles-site.css --no-source-map"
+  },
+  "dependencies": {
+    "sass": "^1.69.6",
+    "yarn": "^1.22.21"
+  }
+}
