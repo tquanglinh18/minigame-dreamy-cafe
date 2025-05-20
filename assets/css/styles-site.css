@@ -113,11 +113,9 @@ section {
 }
 
 .game-header {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  width: 35%;
+  transform: translateY(32%);
+  z-index: 12;
 }
 .game-header__logo {
   width: 100%;
