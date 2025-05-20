@@ -254,7 +254,7 @@ new spine.SpinePlayer("right-character", {
   skeleton: "assets/spine/Waiter_417Down.json",
   atlas: "assets/spine/Waiter_417Down.atlas",
   success: function (player) {
-    player
+    player;
     player.setAnimation("idle_Down", true);
   },
 });
