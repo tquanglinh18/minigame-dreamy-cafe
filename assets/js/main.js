@@ -1,6 +1,8 @@
 const gameBoard = document.querySelector(".game-board");
 const resetButton = document.querySelector(".reset-button");
 const playAudioButton = document.getElementById("btn-play-audio");
+const clickCardAudio = document.getElementById("audio-click-card");
+const winningAudio = document.getElementById("audio-winning");
 
 // Thêm sự kiện click cho nút "Play Audio" để phát nhạc nền
 if (playAudioButton != null) {
@@ -266,6 +268,7 @@ function startGame() {
 
 // Hàm xử lý sự kiện khi một thẻ được click
 function flipCard() {
+  clickCardAudio.play();
   // Chỉ cho phép lật thẻ khi game đã bắt đầu
   if (
     !gameStarted ||
@@ -324,6 +327,8 @@ function animateJojoWin(card1, card2) {
   // 1. Hiệu ứng sáng lên
   card1.classList.add("lighting-up");
   card2.classList.add("lighting-up");
+    winningAudio.play(); // Phát âm thanh trúng thưởng
+
 
   // *** Ẩn các thẻ không phải Jojo khi hiệu ứng bắt đầu ***
   const allCards = gameBoard.querySelectorAll(".card-flip");
