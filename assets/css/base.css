@@ -182,3 +182,146 @@
     opacity: 1;
   }
 }
+
+@keyframes jojo-blink {
+  0%,
+  96%,
+  100% {
+    transform: scaleY(1);
+  }
+  97%,
+  98% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes jojo-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+}
+
+@keyframes jojo-limb-move {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-2.5px) rotate(1.2deg);
+  }
+}
+
+@keyframes jojo-hair-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.2deg);
+  }
+}
+
+@keyframes jojo-head-sway {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(3px) rotate(1.5deg);
+  }
+  50% {
+    transform: translateX(0) rotate(0deg);
+  }
+  75% {
+    transform: translateX(-3px) rotate(-1.5deg);
+  }
+}
+
+@keyframes jojo-arm-move {
+  0%,
+  100% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(-3deg);
+  }
+}
+
+/* ==== ANIMATION CLASSES ==== */
+.jojo-eye {
+  animation: jojo-blink 2.8s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.jojo-limb {
+  animation: jojo-limb-move 1.3s infinite ease-in-out;
+  transform-origin: top center;
+}
+
+.jojo-body {
+  animation: jojo-bob 1.4s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.jojo-hair {
+  animation: jojo-hair-sway 1s infinite ease-in-out;
+  transform-origin: top center;
+}
+
+.jojo-arm-left {
+  animation: jojo-arm-move 1s infinite ease-in-out reverse;
+  transform-origin: top right;
+}
+
+/* Chân trái */
+@keyframes jojo-leg-move-left {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.8deg);
+  }
+}
+
+/* Chân phải */
+@keyframes jojo-leg-move-right {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-1.8deg);
+  }
+}
+
+/* Chân trái */
+.jojo-leg-left {
+  animation: jojo-leg-move-left 1.2s infinite ease-in-out;
+  transform-origin: top center;
+}
+
+/* Chân phải */
+.jojo-leg-right {
+  animation: jojo-leg-move-right 1.2s infinite ease-in-out;
+  transform-origin: top center;
+}
+
+.jojo-arm-right {
+  animation: jojo-arm-move 1s infinite alternate-reverse ease-in-out;
+  transform-origin: top left;
+}
+
+.jojo-head-wrapper {
+  animation: jojo-head-sway 1.8s infinite ease-in-out;
+  transform-origin: center center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
