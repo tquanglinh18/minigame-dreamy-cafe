@@ -387,14 +387,13 @@ section {
 
 .audio-page {
   width: 100%;
-  position: relative;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 999;
 }
 
 .audio-status {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 9999;
   width: 5%;
   max-width: 64px;
   aspect-ratio: 1/1;
