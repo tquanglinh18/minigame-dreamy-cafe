@@ -488,8 +488,8 @@ new spine.SpinePlayer("right-character", {
   alpha: true,
   showControls: false,
   backgroundColor: "#00000000",
-  skeleton: "assets/spine/Waiter_417Down.json",
-  atlas: "assets/spine/Waiter_417Down.atlas",
+  skeleton: "https://s3.vtconline.vn/public/VTCOnline/spine-tuyen/Waiter_417Down.json",
+  atlas: "https://s3.vtconline.vn/public/VTCOnline/spine-tuyen/Waiter_417Down.atlas",
   success: function (player) {
     player;
     player.setAnimation("idle_Down", true);
@@ -500,8 +500,8 @@ new spine.SpinePlayer("left-character", {
   alpha: true,
   showControls: false,
   backgroundColor: "#00000000",
-  skeleton: "assets/spine/Waiter_428Down.json",
-  atlas: "assets/spine/Waiter_428Down.atlas",
+  skeleton: "https://s3.vtconline.vn/public/VTCOnline/spine-tuyen/Waiter_428Down.json",
+  atlas: "https://s3.vtconline.vn/public/VTCOnline/spine-tuyen/Waiter_428Down.atlas",
   success: function (player) {
     player.setAnimation("idle_Down", true);
   },
