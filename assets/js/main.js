@@ -71,13 +71,11 @@ function createBoard() {
         '<div class="default-front-card"><img src="./assets/images/img_ice_cream.png"/></div>'; // Hiển
     }
 
-    // *** Thêm logic áp dụng màu nền dựa trên CHỈ SỐ (vị trí) của ô vào cardFront ***
     if (specialIndices.includes(index)) {
       cardFront.classList.add("special-color"); // Sử dụng màu đặc biệt cho mặt trước
     } else {
       cardFront.classList.add("default-color"); // Sử dụng màu mặc định cho mặt trước
     }
-    // ******************************************************************************
 
     const cardBack = document.createElement("div");
     cardBack.classList.add("card-face", "card-back", "initial"); // Thêm class 'initial' và hiển thị "?"
@@ -116,13 +114,13 @@ function startGame() {
 
   // Lật tất cả thẻ về mặt sau hiển thị số
   const allCards = gameBoard.querySelectorAll(".card-flip");
-  allCards.forEach((card) => {
+  for (const [index, card] of allCards.entries()) {
     const cardBack = card.querySelector(".card-back");
-    cardBack.textContent = card.dataset.number; // Hiển thị số ngẫu nhiên
+    cardBack.textContent = index + 1; // Hiển thị số ngẫu nhiên
     cardBack.classList.remove("initial"); // Xóa class 'initial' để áp dụng styling số
     // Đảm bảo thẻ đang úp (không có class is-flipped)
     card.classList.remove("is-flipped");
-  });
+  }
 
   lockBoard = false; // Mở khóa bảng để cho phép lật thẻ
   flippedCards = []; // Reset danh sách thẻ lật
@@ -159,7 +157,7 @@ function checkMatch() {
 
   // Kiểm tra điều kiện thắng: cả hai đều là 'Jojo' (true)
   if (value1 === true && value2 === true) {
-    console.log("Chúc mừng! Bạn đã trúng thưởng!");
+
     hasWon = true; // Đặt cờ thắng
     lockBoard = true; // Khóa bảng ngay lập tức khi biết thắng
 
@@ -172,7 +170,7 @@ function checkMatch() {
     }, 500); // Hiển thị thông báo trúng thưởng trong 2 giây
   } else {
     // Trường hợp không trúng thưởng (không phải 2 Jojo)
-    console.log("Rất tiếc, không trúng thưởng. Hãy thử lại!");
+
 
     // Úp lại tất cả thẻ đang lật sau 1 giây
     setTimeout(() => {
@@ -237,10 +235,11 @@ function animateJojoWin(card1, card2) {
     card2.classList.add('moving-to-center');
 
     // Đặt vị trí đích là tâm game board
-    card1.style.top = centerY + 'px';
-    card1.style.left = centerX + 'px';
-    card2.style.top = centerY + 'px';
-    card2.style.left = centerX + 'px';
+    card1.style.top = 50 + '%';
+    card1.style.left = 50 + '%';
+    card2.style.top = 50 + '%';
+    card2.style.left = 50 + '%'
+
 
     // Lắng nghe sự kiện kết thúc transition của một trong hai thẻ
     card1.addEventListener('transitionend', handleMoveEnd);
@@ -265,12 +264,8 @@ function animateJojoWin(card1, card2) {
     card1.classList.remove('moving-to-center');
     card1.classList.add('win-animation');
 
-    setTimeout(() => {
-      card1.style.transform = 'rotateY(180deg)'; // Đặt lại transform để animation lắc lư hoạt động từ gốc
-      card1.classList.remove('moving-to-center'); // Loại bỏ class di chuyển
-      card1.classList.add('win-animation'); // Thêm class animation lắc lư
-      card1.addEventListener('animationend', handleWinAnimationEnd);
-    }, 100);
+    card1.addEventListener('animationend', handleWinAnimationEnd);
+
 
   }
 
@@ -278,7 +273,7 @@ function animateJojoWin(card1, card2) {
   function handleWinAnimationEnd() {
     card1.removeEventListener('animationend', handleWinAnimationEnd); // Gỡ bỏ listener
 
-    console.log("Animation kết thúc!");
+
   }
 }
 
@@ -308,7 +303,6 @@ function revealAllCards() {
 
 // Hàm thiết lập sự kiện cho các nút điều khiển
 function setupControls() {
-
   // Gán sự kiện click cho nút Chơi lại (luôn hiển thị)
   resetButton.removeEventListener("click", createBoard); // Xóa listener cũ nếu có
   resetButton.addEventListener("click", createBoard);
@@ -322,7 +316,7 @@ function getFontSizeTarget() {
   const elements = document.querySelectorAll("[target-node][font-percents]");
 
   elements.forEach((el) => {
-    console.debug(el);
+
     const targetId = el.getAttribute("target-node");
     const percent = parseFloat(el.getAttribute("font-percents"));
 
@@ -364,7 +358,7 @@ function getFontSizeTarget() {
   const elements = document.querySelectorAll("[target-node][font-percents]");
 
   elements.forEach((el) => {
-    console.debug(el);
+
     const targetId = el.getAttribute("target-node");
     const percent = parseFloat(el.getAttribute("font-percents"));
 
