@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minigame Dreamy Cafe</title>
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/styles-site.css" />
+  <link rel="stylesheet" href="./assets/css/spine-player.css" />
+</head>
+
+<body>
+  <section>
+    <div class="audio-page">
+      <div class="audio-status audio--pause" id="btn-play-audio"></div>
+      <audio src="./assets/audio/BGM.mp3" id="bg-audio" loop="loop"></audio>
+      <audio src="./assets/audio/ClickSound.mp3" id="audio-click-card"></audio>
+      <audio src="./assets/audio/WinningSound.mp3" id="audio-winning"></audio>
+    </div>
+    <audio src="./assets/audio/BGM.mp3" id="bg-audio" loop="loop"></audio>
+    <audio src="./assets/audio/ClickSound.mp3" id="audio-click-card"></audio>
+    <audio src="./assets/audio/WinningSound.mp3" id="audio-winning"></audio>
+    <audio src="./assets/audio/ErrorSound1.mp3" id="audio-error"></audio>
+    </div>
+    <div class="decor">
+      <div class="decor__star">
+        <img src="./assets/images/bg_decor_star.png" alt="" />
+        <!-- Ngôi sao 1 -->
+        <div style="top: 13%;left: 1%;width: 15%; --i: 1; --z: 2;">
+          <img src="./assets/images/decor_start_light.png" alt="" />
+        </div>
+
+        <!-- Ngôi sao 2 -->
+        <div style="top: 42%; left: 6%; width: 7%; --i: 2">
+          <img src="./assets/images/decor_star_2.png" alt="" />
+        </div>
+
+        <!-- Ngôi sao 3 -->
+        <div style="top: 47%; left: 0%; width: 5%; --i: 3">
+          <img src="./assets/images/decor_star_3.png" alt="" />
+        </div>
+
+        <!-- Ngôi sao 4 -->
+        <div style="
+              top: 62%;
+              left: -4%;
+              width: 11%;
+              transform: rotate(36deg);
+              --i: 4;
+            ">
+          <img src="./assets/images/decor_start_light.png" alt="" />
+        </div>
+
+        <!-- Ngôi sao 5 -->
+        <div style="
+              top: 18%;
+              right: 8%;
+              width: 9%;
+              transform: rotate(75deg);
+              --i: 1;
+            ">
+          <img src="./assets/images/decor_star_2.png" alt="" />
+        </div>
+
+        <!-- Ngôi sao 6 -->
+        <div style="
+              top: 40%;
+              right: 5%;
+              width: 4%;
+              transform: rotate(39deg);
+              --i: 2;
+            ">
+          <img src="./assets/images/decor_star_2.png" alt="" />
+        </div>
+
+        <!-- Ngôi sao 7 -->
+        <div style="
+              top: 50%;
+              right: 0%;
+              width: 7%;
+              transform: rotate(75deg);
+              --i: 3;
+            ">
+          <img src="./assets/images/decor_star_2.png" alt="" />
+        </div>
+
+        <!-- Ngôi sao 8 -->
+        <div style="
+              top: 38%;
+              right: 11%;
+              width: 12%;
+              transform: rotate(82deg);
+              --i: 4;
+            ">
+          <img src="./assets/images/decor_star_2.png" alt="" />
+        </div>
+      </div>
+
+      <div class="decor__light-spin">
+        <!-- <img src="./assets/images/img_decor_hightlight_spin.png" alt=""> -->
+      </div>
+    </div>
+
+    <div class="page-content" style="transform: translateY(-2%);">
+      <div class="game-header">
+        <img style="width: 100%" src="./assets/images/slogan.png" alt="" />
+      </div>
+      <div class="lst-box-wrap">
+        <div class="balloon-effect" style="
+              width: 17%;
+              padding-top: 17%;
+              left: -35%;
+              bottom: 5%;
+              position: absolute;
+            ">
+          <!-- bong bóng -->
+          <div style="position: absolute; inset: 0">
+            <img style="width: 100%; height: 100%" src="./assets/images/decor_5.png" alt="" />
+          </div>
+          <!-- camera -->
+          <div style="width: 38%; position: absolute; top: 21%; right: 28%">
+            <img class="camera-effect" style="width: 100%; height: 100%" src="./assets/images/decor_camera.png"
+              alt="" />
+          </div>
+        </div>
+        <!-- trái tim -->
+        <div class="balloon-effect-reverse" style="
+              position: absolute;
+              bottom: 0;
+              left: -20%;
+              width: 28%;
+              z-index: 20;
+            ">
+          <img style="width: 100%" src="./assets/images/decor_heart.png" alt="" />
+        </div>
+        <div class="balloon-effect-reverse" style="
+              position: absolute;
+              top: -15%;
+              left: -24%;
+              width: 34%;
+              z-index: 10;
+            ">
+          <img style="width: 100%" src="./assets/images/decor_3.png" alt="" />
+        </div>
+        <div class="balloon-effect-reverse" style="
+              position: absolute;
+              bottom: 8%;
+              left: -21%;
+              width: 55%;
+              z-index: 10;
+            ">
+          <img style="width: 100%" src="./assets/images/decor_4.png" alt="" />
+        </div>
+        <div class="balloon-effect-reverse" style="
+              position: absolute;
+              bottom: 8%;
+              right: -21%;
+              width: 55%;
+              z-index: 10;
+            ">
+          <img style="width: 100%" src="./assets/images/decor_4.png" alt="" />
+        </div>
+        <!-- ngôi sao 1 -->
+        <div class="balloon-effect-reverse" style="
+              position: absolute;
+              bottom: 7%;
+              left: -25%;
+              width: 30%;
+              z-index: 20;
+            ">
+          <img style="width: 100%" src="./assets/images/decor_2.png" alt="" />
+        </div>
+        <!-- ngôi sao 2 -->
+        <div class="balloon-effect-reverse" style="
+              position: absolute;
+              bottom: 0%;
+              left: -7%;
+              width: 17%;
+              z-index: 20;
+            ">
+          <img style="width: 100%" src="./assets/images/decor_1.png" alt="" />
+        </div>
+        <!-- ngôi sao 2 -->
+        <div class="balloon-effect-reverse" style="
+              position: absolute;
+              bottom: -2%;
+              right: -18%;
+              width: 25%;
+              z-index: 20;
+            ">
+          <img class="star-bounce-glow" style="width: 100%" src="./assets/images/decor_1.png" alt="" />
+        </div>
+        <div id="left-character" style="
+              filter: contrast(1.25);
+              position: absolute;
+              top: -1%;
+              left: -31%;
+              width: 54%;
+              height: 100%;
+              z-index: 5;
+            "></div>
+        <div id="right-character" style="
+              filter: contrast(1.25);
+              position: absolute;
+              transform: scaleX(-1);
+              top: -4%;
+              right: -41%;
+              width: 78%;
+              height: 100%;
+              z-index: 5;
+            "></div>
+        <div class="game-content">
+          <div style="position: relative">
+            <div class="winner-light-effect" style="
+                  position: absolute;
+                  width: 109%;
+                  height: 113%;
+                  top: 50%;
+                  right: 50%;
+                  border-radius: 9%;
+                  visibility: hidden;
+                  overflow: hidden;
+                  transform: translate(50%, -50%);
+                ">
+              <div style="position: absolute; width: 300%;  top: 50%;
+                  right: 50%;transform: translate(50%, -50%)">
+                <img class="decor__light_win" style="width: 100%;" src="./assets/images/img_highlight_jojo.png"
+                  alt="" />
+              </div>
+            </div>
+            <div class="game-board"></div>
+            <div target-node=".game-content" font-percents="0.035" id="winning-message" class="message">Hoàn thành Lật Thẻ May Mắn,<br />Chủ tiệm có trí nhớ thật siêu phàm! ^^</div>
+          </div>
+        </div>
+      </div>
+      <div class="game-action">
+        <!-- <button class="start-button">
+            <img src="./assets/images/btn_start.png" alt="" />
+          </button> -->
+        <button class="reset-button">
+          <img src="./assets/images/btn_reset.png" alt="" />
+        </button>
+      </div>
+    </div>
+  </section>
+  <script src="./assets/js/spine-player.js"></script>
+  <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

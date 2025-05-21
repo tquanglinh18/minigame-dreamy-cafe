@@ -1,0 +1,432 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+section {
+  min-height: 100vh;
+  min-width: 100%;
+  background: url("../images/bg_main_page.png") no-repeat 100% 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.decor {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.decor__star {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.decor__star img {
+  width: 100%;
+}
+
+.decor__light-spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 250%;
+  background-image: url("../images/img_highlight_jojo.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transform: translate(-50%, -50%);
+  animation: rotate-bg 30s linear infinite;
+  z-index: 1;
+  overflow: hidden;
+}
+.decor__light_win {
+  animation: rotate-win 30s linear infinite;
+}
+
+@keyframes rotate-win {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes rotate-bg {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.lst-box-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 920/729;
+  max-width: 45%;
+}
+
+.game-content {
+  background-image: url("../images/bg_frame_matrix.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 9%;
+  position: relative;
+  z-index: 10;
+}
+
+.game-action {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 2;
+}
+.game-action button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  max-width: 12.5%;
+}
+.game-action button img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.game-header {
+  width: 35%;
+  transform: translateY(32%);
+  z-index: 12;
+}
+.game-header__logo {
+  width: 100%;
+  max-width: 12.5%;
+}
+.game-header__logo img {
+  width: 100%;
+  object-fit: contain;
+}
+.game-header__title {
+  width: 100%;
+  max-width: 25%;
+}
+.game-header__title img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cột, mỗi cột rộng 100px */
+  grid-template-rows: repeat(3, 1fr); /* 3 hàng, mỗi hàng cao 100px */
+  perspective: 600px; /* Hiệu ứng 3D cho lật thẻ */
+}
+
+.card-flip {
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: relative; /* Quan trọng cho việc lật */
+  transform-style: preserve-3d; /* Đảm bảo các mặt phẳng con được giữ trong không gian 3D */
+  transition: transform 0.5s; /* Thời gian lật */
+  cursor: pointer;
+  border: 0 !important;
+}
+
+.card-flip.is-flipped {
+  transform: rotateY(180deg); /* Lật thẻ 180 độ quanh trục Y */
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Ẩn mặt sau khi chưa lật */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.card-back {
+  background-color: #4682b4; /* Màu xanh ban đầu */
+  color: white;
+  font-size: 6rem;
+  font-weight: bold;
+}
+
+/* Styling cho mặt sau khi hiển thị dấu "?" */
+.card-back.initial {
+  background-color: #6a6a6a; /* Màu xám cho dấu "?" */
+  font-size: 3em; /* Kích thước lớn hơn cho dấu "?" */
+  color: white;
+  cursor: not-allowed;
+}
+
+.card-front {
+  background-color: #eee; /* Màu nền khi lật */
+  color: #333;
+  transform: rotateY(180deg); /* Mặt trước ban đầu quay 180 độ để ẩn */
+  text-align: center;
+}
+
+.card-back.default-color,
+.card-front.default-color {
+  background-color: #f4f4e5;
+  color: #35add6;
+}
+
+.card-back.special-color,
+.card-front.special-color {
+  background-color: #ffb3c7;
+  color: #ffffff;
+}
+
+.default-front-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.default-front-card img {
+  width: 100%;
+  object-fit: contain;
+  max-width: 40%;
+}
+
+.card-jojo {
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/img_highlight_jojo.png"),
+    linear-gradient(to top, #edbae7, #af94d4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 150% 150%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.card-jojo img {
+  width: 100%;
+  object-fit: contain;
+  max-width: 50%;
+}
+
+.modal-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 6px solid #fa9fc1;
+  border-radius: 1rem;
+  background-color: #bee6f3;
+}
+
+.modal-content::before {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border: 6px solid #fff;
+  border-radius: 1rem;
+}
+
+.modal-header {
+  width: 100%;
+  border-bottom: none;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  font-weight: bold;
+  color: #0f779a;
+  padding-top: 3rem;
+}
+
+.modal-body {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0f779a;
+}
+
+.modal-footer {
+  width: 100%;
+  border-top: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0;
+}
+
+.modal-footer .btn-close-modal {
+  width: 40%;
+  opacity: 1;
+  border: none;
+  background-color: transparent;
+
+  transform: translateY(65%);
+}
+.modal-footer .btn-close-modal img {
+  width: 100%;
+}
+
+.modal-dialog {
+  max-width: 45%;
+}
+
+/* Áp dụng animation di chuyển background khi thẻ Jojo được lật */
+.card-flip.is-flipped .card-front.isJojo {
+  background-position: 100% 50%; /* Đích đến của background-position */
+}
+
+/* *** CSS cho hiệu ứng thắng Jojo *** */
+
+/* Hiệu ứng sáng lên */
+.card-flip.lighting-up {
+  width: fit-content;
+
+  z-index: 10; /* Đưa lên trên cùng */
+}
+
+/* Trạng thái khi thẻ đang di chuyển */
+.card-flip.moving-to-center {
+  position: absolute; /* Chuyển sang absolute để di chuyển tự do */
+  transition: top 1s ease-in-out, left 1s ease-in-out, translate 0.5s; /* Transition cho vị trí */
+  z-index: 20; /* Đảm bảo ở trên các thẻ khác */
+  transform: translate(-50%, -50%); /* Giữ thẻ ở giữa */
+}
+.moving-to-center.card-flip,
+.win-animation.card-flip {
+  width: 25%;
+}
+.win-animation .card-jojo {
+  border: none;
+}
+/* Hiệu ứng lắc lư và phóng to */
+.card-flip.win-animation {
+  animation: shake-and-scale 1s ease-in-out forwards; /* Tên animation, thời gian, kiểu, giữ trạng thái cuối */
+  z-index: 30; /* Đưa lên trên cùng */
+}
+.card-flip.win-animation .default-front-card {
+  animation: zoom-in-zoom-out 3s ease-in-out infinite forwards;
+}
+
+/* Định nghĩa keyframes cho hiệu ứng lắc lư và phóng to */
+@keyframes shake-and-scale {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotateY(0deg); /* Bắt đầu ở vị trí ban đầu */
+  } /* Bắt đầu */
+
+  100% {
+    transform: translate(-50%, -50%) scale(2) rotateY(180deg);
+  } /* Kết thúc ở giữa, phóng to tối đa */
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1.125);
+  }
+  50% {
+    transform: scale(1.25, 1.25);
+  }
+  100% {
+    transform: scale(1.125);
+  }
+}
+
+/* Ẩn thẻ Jojo thứ hai sau khi hợp nhất */
+.card-flip.hidden {
+  visibility: hidden; /* Ẩn nhưng vẫn giữ không gian */
+  /* Hoặc display: none; nếu không muốn giữ không gian */
+}
+
+/* *** Class để ẩn các thẻ không phải Jojo trong animation thắng *** */
+.card-flip.hidden-during-win-animation {
+  pointer-events: none; /* Đảm bảo không thể click */
+  animation: fade-out 0.5s forwards; /* Thời gian fade-out */
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1; /* Bắt đầu với độ mờ 1 */
+  }
+  100% {
+    opacity: 0; /* Kết thúc với độ mờ 0 */
+  }
+}
+
+.audio-page {
+  width: 100%;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 999;
+}
+
+.audio-status {
+  width: 4%;
+  aspect-ratio: 1/1;
+  background-image: url("../images/btn_soundon.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.audio--pause {
+  background-image: url("../images/btn_soundoff.png");
+}
+
+.message {
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+}

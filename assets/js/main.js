@@ -11,6 +11,9 @@ if (playAudioButton != null) {
   playAudioButton.addEventListener("click", () => {
     playAudioButton.classList.toggle("audio--pause");
     var bgAudio = document.getElementById("bg-audio");
+    if (bgAudio) {
+      bgAudio.volume = 0.5; // Giảm âm lượng xuống 60%
+    }
     if (bgAudio.duration > 0 && !bgAudio.paused) {
       bgAudio.pause();
     } else {
@@ -58,6 +61,12 @@ function createBoard() {
   lockBoard = false;
   hasWon = false; // Reset trạng thái thắng
   gameStarted = false; // Đặt lại trạng thái game chưa bắt đầu
+  winningMessage.style.display = "none";
+
+  const a3 = document.querySelector(".winner-light-effect");
+  if (a3) {
+    a3.style.visibility = "hidden"; // Đặt lại độ hiển thị của hiệu ứng ánh sáng
+  }
 
   // Xáo trộn các giá trị ẩn cho mặt trước của thẻ (true/false)
   const shuffledValues = shuffle(cardValues);
@@ -82,7 +91,7 @@ function createBoard() {
     // Hiển thị nội dung thực tế trên mặt trước dựa vào giá trị ẩn
     if (value === true) {
       cardFront.innerHTML = `<div class="default-front-card card-jojo">
-      <div style="width: 58%; position: absolute">
+      <div style="width: 58%;">
       <div style="width: 100%; padding-top: 145.55%; position: relative">
         <!-- Chân trái -->
         <div
@@ -90,7 +99,7 @@ function createBoard() {
           style="width: 19.58%; position: absolute; top: 86%; right: 28%"
         >
           <img
-            style="width: 100%; max-width: 100%"
+            style="width: 100%; max-width: 100%; display: block"
             src="./assets/images/jojo_1.png"
             alt="Chân trái"
           />
@@ -102,7 +111,7 @@ function createBoard() {
           style="width: 19.58%; position: absolute; top: 83%; right: 15%"
         >
           <img
-            style="width: 100%; max-width: 100%"
+            style="width: 100%; max-width: 100%; display: block"
             src="./assets/images/jojo_2.png"
             alt="Chân phải"
           />
@@ -114,7 +123,7 @@ function createBoard() {
           style="width: 18.69%; position: absolute; top: 71%; right: 11%"
         >
           <img
-            style="width: 100%; max-width: 100%"
+            style="width: 100%; max-width: 100%; display: block"
             src="./assets/images/jojo_5.png"
             alt="Tay phải"
           />
@@ -126,7 +135,7 @@ function createBoard() {
           style="width: 29.98%; position: absolute; top: 69%; right: 19%"
         >
           <img
-            style="width: 100%; max-width: 100%"
+            style="width: 100%; max-width: 100%; display: block"
             src="./assets/images/jojo_4.png"
             alt="Thân nhân vật"
           />
@@ -138,7 +147,7 @@ function createBoard() {
           style="width: 20.36%; position: absolute; top: 73%; right: 38%"
         >
           <img
-            style="width: 100%; max-width: 100%"
+            style="width: 100%; max-width: 100%; display: block"
             src="./assets/images/jojo_3.png"
             alt="Tay trái"
           />
@@ -152,7 +161,7 @@ function createBoard() {
             style="width: 51.78%; position: absolute; top: 0; left: 0"
           >
             <img
-              style="width: 100%; max-width: 100%"
+              style="width: 100%; max-width: 100%; display: block"
               src="./assets/images/jojo_6.png"
               alt="Tóc búi"
             />
@@ -161,7 +170,7 @@ function createBoard() {
           <!-- Đầu nhân vật -->
           <div style="width: 95.38%; position: absolute; top: 12%; right: 0%">
             <img
-              style="width: 100%; max-width: 100%"
+              style="width: 100%; max-width: 100%; display: block"
               src="./assets/images/jojo_7.png"
               alt="Đầu nhân vật"
             />
@@ -173,7 +182,7 @@ function createBoard() {
             style="width: 23.36%; position: absolute; top: 58%; right: 37%"
           >
             <img
-              style="width: 100%; max-width: 100%"
+              style="width: 100%; max-width: 100%; display: block"
               src="./assets/images/jojo_9.png"
               alt="Mắt trái"
             />
@@ -185,7 +194,7 @@ function createBoard() {
             style="width: 15.85%; position: absolute; top: 54%; right: 9%"
           >
             <img
-              style="width: 100%; max-width: 100%"
+              style="width: 100%; max-width: 100%; display: block"
               src="./assets/images/jojo_10.png"
               alt="Mắt phải"
             />
@@ -197,7 +206,7 @@ function createBoard() {
             style="width: 63.85%; position: absolute; top: 34%; right: 4%"
           >
             <img
-              style="width: 100%; max-width: 100%"
+              style="width: 100%; max-width: 100%; display: block"
               src="./assets/images/jojo_8.png"
               alt="Tóc mái"
             />
@@ -332,7 +341,6 @@ function animateJojoWin(card1, card2) {
   card2.classList.add("lighting-up");
   winningAudio.play(); // Phát âm thanh trúng thưởng
 
-
   // *** Ẩn các thẻ không phải Jojo khi hiệu ứng bắt đầu ***
   const allCards = gameBoard.querySelectorAll(".card-flip");
   allCards.forEach((card) => {
@@ -371,7 +379,6 @@ function animateJojoWin(card1, card2) {
   setTimeout(() => {
     card1.classList.remove("lighting-up");
     card2.classList.remove("lighting-up");
-    winningMessage.style.display = "block"; // Hiển thị thông báo trúng thưởng
     card1.classList.add("moving-to-center");
     card2.classList.add("moving-to-center");
 
@@ -402,7 +409,19 @@ function animateJojoWin(card1, card2) {
     // 3. Lắc lư và phóng to trên thẻ còn lại
     card1.classList.remove("moving-to-center");
     card1.classList.add("win-animation");
-
+    const a1 = document.querySelector(".win-animation .card-front");
+    const a2 = document.querySelector(".win-animation .card-jojo");
+    const a3 = document.querySelector(".winner-light-effect");
+    if (a3) {
+      a3.style.visibility = "visible"; // Đặt lại độ hiển thị của hiệu ứng ánh sáng
+    }
+    if (a1) {
+      a1.style.backgroundColor = "transparent"; // Đặt màu nền trong suốt
+    }
+    if (a2) {
+      a2.style.backgroundImage = "none";
+    }
+    winningMessage.style.display = "block"; // Hiển thị thông báo trúng thưởng
     card1.addEventListener("animationend", handleWinAnimationEnd);
   }
 

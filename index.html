@@ -8,18 +8,21 @@
   <link rel="stylesheet" href="./assets/css/main.css" />
   <link rel="stylesheet" href="./assets/css/base.css" />
   <link rel="stylesheet" href="./assets/css/styles-site.css" />
-  <link rel="stylesheet" href="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/spine-player.css" />
+  <link rel="stylesheet" href="./assets/css/spine-player.css" />
 </head>
 
 <body>
   <section>
     <div class="audio-page">
-      <div class="audio-status audio--pause" id="btn-play-audio">
-      </div>
+      <div class="audio-status audio--pause" id="btn-play-audio"></div>
       <audio src="./assets/audio/BGM.mp3" id="bg-audio" loop="loop"></audio>
       <audio src="./assets/audio/ClickSound.mp3" id="audio-click-card"></audio>
       <audio src="./assets/audio/WinningSound.mp3" id="audio-winning"></audio>
-      <audio src="./assets/audio/ErrorSound1.mp3" id="audio-error"></audio>
+    </div>
+    <audio src="./assets/audio/BGM.mp3" id="bg-audio" loop="loop"></audio>
+    <audio src="./assets/audio/ClickSound.mp3" id="audio-click-card"></audio>
+    <audio src="./assets/audio/WinningSound.mp3" id="audio-winning"></audio>
+    <audio src="./assets/audio/ErrorSound1.mp3" id="audio-error"></audio>
     </div>
     <div class="decor">
       <div class="decor__star">
@@ -30,40 +33,69 @@
         </div>
 
         <!-- Ngôi sao 2 -->
-        <div style="top: 42%;left: 6%;width: 7%; --i: 2;">
+        <div style="top: 42%; left: 6%; width: 7%; --i: 2">
           <img src="./assets/images/decor_star_2.png" alt="" />
         </div>
 
         <!-- Ngôi sao 3 -->
-        <div style="top: 47%;left: 0%;width: 5%; --i: 3;">
+        <div style="top: 47%; left: 0%; width: 5%; --i: 3">
           <img src="./assets/images/decor_star_3.png" alt="" />
         </div>
 
         <!-- Ngôi sao 4 -->
-        <div style="top: 62%;left: -4%;width: 11%;transform: rotate(36deg); --i: 4;">
+        <div style="
+              top: 62%;
+              left: -4%;
+              width: 11%;
+              transform: rotate(36deg);
+              --i: 4;
+            ">
           <img src="./assets/images/decor_start_light.png" alt="" />
         </div>
 
         <!-- Ngôi sao 5 -->
-        <div style="top: 18%;right: 8%;width: 9%;transform: rotate(75deg); --i: 1;">
+        <div style="
+              top: 18%;
+              right: 8%;
+              width: 9%;
+              transform: rotate(75deg);
+              --i: 1;
+            ">
           <img src="./assets/images/decor_star_2.png" alt="" />
         </div>
 
         <!-- Ngôi sao 6 -->
-        <div style="top: 40%;right: 5%;width: 4%;transform: rotate(39deg); --i: 2;">
+        <div style="
+              top: 40%;
+              right: 5%;
+              width: 4%;
+              transform: rotate(39deg);
+              --i: 2;
+            ">
           <img src="./assets/images/decor_star_2.png" alt="" />
         </div>
 
         <!-- Ngôi sao 7 -->
-        <div style="top: 50%;right: 0%;width: 7%;transform: rotate(75deg); --i: 3;">
+        <div style="
+              top: 50%;
+              right: 0%;
+              width: 7%;
+              transform: rotate(75deg);
+              --i: 3;
+            ">
           <img src="./assets/images/decor_star_2.png" alt="" />
         </div>
 
         <!-- Ngôi sao 8 -->
-        <div style="top: 38%;right: 11%;width: 12%;transform: rotate(82deg); --i: 4;">
+        <div style="
+              top: 38%;
+              right: 11%;
+              width: 12%;
+              transform: rotate(82deg);
+              --i: 4;
+            ">
           <img src="./assets/images/decor_star_2.png" alt="" />
         </div>
-
       </div>
 
       <div class="decor__light-spin">
@@ -71,9 +103,9 @@
       </div>
     </div>
 
-    <div class="page-content">
+    <div class="page-content" style="transform: translateY(-2%);">
       <div class="game-header">
-        <img style="width: 100%;" src="./assets/images/slogan.png" alt="">
+        <img style="width: 100%" src="./assets/images/slogan.png" alt="" />
       </div>
       <div class="lst-box-wrap">
         <div class="balloon-effect" style="
@@ -103,12 +135,12 @@
             ">
           <img style="width: 100%" src="./assets/images/decor_heart.png" alt="" />
         </div>
-        <div class="balloon-effect-reverse" style="      
+        <div class="balloon-effect-reverse" style="
               position: absolute;
               top: -15%;
               left: -24%;
               width: 34%;
-              z-index: 10;          
+              z-index: 10;
             ">
           <img style="width: 100%" src="./assets/images/decor_3.png" alt="" />
         </div>
@@ -122,7 +154,7 @@
           <img style="width: 100%" src="./assets/images/decor_4.png" alt="" />
         </div>
         <div class="balloon-effect-reverse" style="
-               position: absolute;
+              position: absolute;
               bottom: 8%;
               right: -21%;
               width: 55%;
@@ -180,9 +212,27 @@
               z-index: 5;
             "></div>
         <div class="game-content">
-          <div class="game-board"></div>
-          <div id="winning-message" class="message">Chúc mừng bạn đã trúng thưởng!</div>
-
+          <div style="position: relative">
+            <div class="winner-light-effect" style="
+                  position: absolute;
+                  width: 109%;
+                  height: 113%;
+                  top: 50%;
+                  right: 50%;
+                  border-radius: 9%;
+                  visibility: hidden;
+                  overflow: hidden;
+                  transform: translate(50%, -50%);
+                ">
+              <div style="position: absolute; width: 300%;  top: 50%;
+                  right: 50%;transform: translate(50%, -50%)">
+                <img class="decor__light_win" style="width: 100%;" src="./assets/images/img_highlight_jojo.png"
+                  alt="" />
+              </div>
+            </div>
+            <div class="game-board"></div>
+            <div target-node=".game-content" font-percents="0.035" id="winning-message" class="message">Hoàn thành Lật Thẻ May Mắn,<br />Chủ tiệm có trí nhớ thật siêu phàm! ^^</div>
+          </div>
         </div>
       </div>
       <div class="game-action">
@@ -195,8 +245,7 @@
       </div>
     </div>
   </section>
-  <script src="https://unpkg.com/@esotericsoftware/spine-player@4.2.*/dist/iife/spine-player.js"></script>
-  <script src="./assets/js/jquery-3.7.1.min.js"></script>
+  <script src="./assets/js/spine-player.js"></script>
   <script src="./assets/js/main.js"></script>
 </body>
 
