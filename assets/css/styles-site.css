@@ -387,18 +387,23 @@ section {
 
 .audio-page {
   width: 100%;
+  position: relative;
+}
+
+.audio-status {
   position: absolute;
   top: 1rem;
   left: 1rem;
   z-index: 9999;
-}
-
-.audio-status {
   width: 5%;
   max-width: 64px;
   aspect-ratio: 1/1;
-  background-image: url("../images/btn_soundoff.png");
+  background-image: url("../images/btn_soundon.png");
   background-repeat: no-repeat;
   background-size: contain;
   cursor: pointer;
+}
+
+.audio--pause {
+  background-image: url("../images/btn_soundoff.png");
 }

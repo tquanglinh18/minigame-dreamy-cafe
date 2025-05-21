@@ -1,5 +1,19 @@
 const gameBoard = document.querySelector(".game-board");
 const resetButton = document.querySelector(".reset-button");
+const playAudioButton = document.getElementById("btn-play-audio");
+
+// Thêm sự kiện click cho nút "Play Audio" để phát nhạc nền
+if (playAudioButton != null) {
+  playAudioButton.addEventListener('click', () => {
+    playAudioButton.classList.toggle("audio--pause");
+    var bgAudio = document.getElementById('bg-audio');
+    if (bgAudio.duration > 0 && !bgAudio.paused) {
+      bgAudio.pause();
+    } else {
+      bgAudio.play();
+    }
+  })
+}
 
 // Danh sách 12 giá trị ẩn cho các ô. Sử dụng true cho mèo (giờ là Jojo), false cho chúc may mắn.
 // Điều này giúp tránh người dùng đọc trực tiếp nội dung nhạy cảm qua DevTools.
