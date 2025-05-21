@@ -406,3 +406,15 @@ section {
 .audio--pause {
   background-image: url("../images/btn_soundoff.png");
 }
+
+.message {
+  display: none;
+  width: 100%;
+  position: absolute;
+  bottom: 11%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  font-size: 1.25rem;
+}

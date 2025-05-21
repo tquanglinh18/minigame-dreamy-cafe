@@ -3,6 +3,8 @@ const resetButton = document.querySelector(".reset-button");
 const playAudioButton = document.getElementById("btn-play-audio");
 const clickCardAudio = document.getElementById("audio-click-card");
 const winningAudio = document.getElementById("audio-winning");
+const errorAudio = document.getElementById("audio-error");
+const winningMessage = document.getElementById("winning-message");
 
 // Thêm sự kiện click cho nút "Play Audio" để phát nhạc nền
 if (playAudioButton != null) {
@@ -314,6 +316,7 @@ function checkMatch() {
     setTimeout(() => {
       unflipCards(); // Úp lại tất cả thẻ đang lật (bao gồm 2 thẻ vừa click)
       lockBoard = false; // Mở khóa bảng để người chơi tiếp tục lật
+      errorAudio.play();
     }, 500); // Hiển thị kết quả thua trong 1 giây
   }
 
@@ -327,7 +330,7 @@ function animateJojoWin(card1, card2) {
   // 1. Hiệu ứng sáng lên
   card1.classList.add("lighting-up");
   card2.classList.add("lighting-up");
-    winningAudio.play(); // Phát âm thanh trúng thưởng
+  winningAudio.play(); // Phát âm thanh trúng thưởng
 
 
   // *** Ẩn các thẻ không phải Jojo khi hiệu ứng bắt đầu ***
@@ -368,7 +371,7 @@ function animateJojoWin(card1, card2) {
   setTimeout(() => {
     card1.classList.remove("lighting-up");
     card2.classList.remove("lighting-up");
-
+    winningMessage.style.display = "block"; // Hiển thị thông báo trúng thưởng
     card1.classList.add("moving-to-center");
     card2.classList.add("moving-to-center");
 
